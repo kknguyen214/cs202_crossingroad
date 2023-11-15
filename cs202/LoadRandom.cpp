@@ -26,24 +26,14 @@ void loadGrass()
 
     Sprite grass[11];
     Texture _grass[11];
-
-    Sprite grassTmp;
+    string pos = "resource/tiles/grass";
 
     for (int i = 0; i < 11; i++)
     {
-        int rd = randomNum(4);
-        string pos = "resource/tiles/grass";
-        pos += to_string(rd);
-        pos += ".png";
-        _grass[i].loadFromFile(pos);
-        grassTmp.setTexture(_grass[i]);
-        grass[i] = grassTmp;
+        _grass[i].loadFromFile(pos + to_string(randomNum(4)) + ".png");
+        grass[i].setTexture(_grass[i]);
         grass[i].setPosition(Vector2f(0, i * 64));
-        //  window.draw(grass);
     }
-
-    //  grass.setPosition(Vector2f(0, 0));
-    //  grass.scale(Vector2f(5, 2));
 
     while (window.isOpen())
     {
@@ -58,6 +48,8 @@ void loadGrass()
         for (int i = 0; i < 11; i++)
         {
             if (grass[i].getPosition().y >= 639) {
+                _grass[i].loadFromFile(pos + to_string(randomNum(4)) + ".png");
+                grass[i].setTexture(_grass[i]);
                 grass[i].setPosition(Vector2f(0, -63));
             }
             else
